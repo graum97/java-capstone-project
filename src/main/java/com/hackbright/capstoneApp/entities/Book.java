@@ -27,9 +27,8 @@ public class Book {
     @Column
     private String author;
 
-    @ManyToOne
-    @JsonBackReference
-    private BookGenre bookGenre;
+    @Column
+    private String genre;
 
     @Column
     private String ownership;
@@ -37,17 +36,13 @@ public class Book {
     @Column
     private Boolean read;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference
-    private Set<BookGenre> bookGenreSet = new HashSet<>();
+    @ManyToOne
+    @JsonBackReference
+    private ReadList readList;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference
-    private Set<ReadList> readListSet = new HashSet<>();
-
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference
-    private Set<ToReadList> toReadListSet = new HashSet<>();
+    @ManyToOne
+    @JsonBackReference
+    private ToReadList toReadList;
 
     public Book(BookDto bookDto) {
         if (bookDto.getTitle() != null) {
@@ -55,6 +50,9 @@ public class Book {
         }
         if (bookDto.getAuthor() != null) {
             this.author = bookDto.getAuthor();
+        }
+        if (bookDto.getGenre() != null) {
+            this.genre = bookDto.getGenre();
         }
         if (bookDto.getOwnership() != null) {
             this.ownership = bookDto.getOwnership();

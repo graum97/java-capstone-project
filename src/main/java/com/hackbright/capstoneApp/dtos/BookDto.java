@@ -14,10 +14,11 @@ public class BookDto implements Serializable {
     private Long id;
     private String title;
     private String author;
-    private BookGenreDto bookGenreDto;
+    private String genre;
     private String ownership;
     private Boolean read;
-
+    private ReadListDto readListDto;
+    private ToReadListDto toReadListDto;
     public BookDto(Book book) {
         if (book.getId() != null) {
             this.id = book.getId();
@@ -27,6 +28,9 @@ public class BookDto implements Serializable {
         }
         if (book.getAuthor() != null) {
             this.author = book.getAuthor();
+        }
+        if (book.getGenre() != null) {
+            this.genre = book.getGenre();
         }
         if (book.getOwnership() != null) {
             this.ownership = book.getOwnership();

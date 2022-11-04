@@ -12,11 +12,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReadListDto implements Serializable {
+    private Long id;
     private UserDto userDto;
     private BookDto bookDto;
     private Date date;
 
     public ReadListDto(ReadList readList) {
+        if (readList.getId() != null) {
+            this.id = readList.getId();
+        }
         if (readList.getDate() != null) {
             this.date = readList.getDate();
         }
